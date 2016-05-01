@@ -1,0 +1,40 @@
+
+@mixin bp($width, $point) {
+	@if $point == $bp-small and $width == $min {
+		@media (#{$min}: #{$bp-small}) { @content;}
+	}
+
+	@else if $point == $bp-small and $width == $max {
+		@media (#{$max}: #{$bp-small}) { @content;}
+	}
+
+	@else if $point == $bp-medium and $width == $min {
+		@media (#{$min}: #{$bp-medium}) { @content;}
+	}
+
+	@else if $point == $bp-medium and $width == $max {
+		@media (#{$max}: #{$bp-medium}) { @content;}
+	}
+
+	@else if $point == $bp-large and $width == $min {
+		@media (#{$min}: #{$bp-large}) { @content;}
+	}
+
+	@else if $point == $bp-large and $width == $max {
+		@media (#{$max}: #{$bp-large}) { @content;}
+	}
+
+}
+
+$min : 'min-width';
+$max : 'max-width';
+
+$bp-small : "460px";
+$bp-medium : "720px";
+$bp-large : "960px";
+
+//Color variables
+$green: #A5D0A7;
+$blue: #8CCED5;
+$purple: #BDB9D7;
+$gray: #939598;

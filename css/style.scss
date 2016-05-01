@@ -1,0 +1,220 @@
+
+@import 'base/normalize';
+@import 'base/variables';
+@import 'base/grid';
+@import 'base/base';
+
+@import 'base/typography';
+
+
+html, body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+}
+
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+#main {
+}
+
+.container {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.app-container--image{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: url('../../img/background2.jpg');
+	background-size: cover;
+	height: 100%;
+    z-index: -1;
+
+	&:after {
+		content: "";
+		background: rgba(#fff, .85);
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 0;
+
+	}
+}
+
+
+.app-container {
+	text-align: center;
+}
+
+//Form Styles
+form {
+	.add-input {
+	    display: block;
+	    margin: 0 auto;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+    	width: 40%;
+		background: $gray;
+	    outline: 0;
+	    border: none;
+	    color: white;
+	    text-align: center;
+	    text-transform: uppercase;
+    	text-align: center;
+   
+	}
+}
+
+.form-wrapper {
+	margin-bottom: 30px;
+}
+
+.input-secondary {
+	margin-top: 30px;
+}
+
+
+//Dates
+.date-container {
+	margin: 0 auto;
+    padding-left: 16%;
+}
+.day {
+	font-size: 214px;
+	letter-spacing: -15px;
+	color: $green;
+}
+
+.month {
+	position: relative;
+	font-size: 140px;
+	text-transform: lowercase;
+	top: -80px;
+    left: -60px;
+    color: $blue;
+
+    > span {
+    	    text-shadow: 3px 0 0 #fff, -3px 0 0 #fff, 0 3px 0 #fff, 0 -3px 0 #fff, 2px 2px #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff;
+    }
+}
+
+.year {
+	position: relative;
+	left: -20%;
+    top: -32px;
+	font-size: 54px;
+	font-weight: 300;
+	color: $purple;
+}
+
+ul {
+	padding-left: 0;
+}
+
+li {
+	position: relative;
+	margin-bottom: 50px;
+}
+
+
+li.High {
+	@include color-theme(High, $green);
+}
+
+li.Medium {
+	@include color-theme(Medium, $blue);
+}
+
+li.Low {
+	@include color-theme(Low, $purple);
+}
+
+.list-container {
+	position: relative;
+	margin-right: 30px;
+	background: #fff;
+}
+
+.list-wrapper {
+	list-style: none;
+}
+
+.check-link {
+	position: absolute;
+	left: 0;
+    right: 0;
+    top: 40px;
+
+    border-radius: 50%;
+    margin: 0 auto;
+    width: 60px;
+    height: 60px;
+    background: white;
+}
+
+.svg-check {
+	width: 50px;
+    height: 50px;
+}
+
+.priority-type {
+	padding-top: 10px;
+	padding-bottom: 30px;
+	text-transform: lowercase;
+    font-style: italic;
+	color: #fff;
+}
+
+.body-wrapper {
+	margin-top: 100px;
+    margin-bottom: 130px;
+}
+
+.todo-text {
+	position: relative;
+	
+    font-style: italic;
+    color: $gray;
+
+    &:before,
+    &:after {
+    	content: "";
+    	position: absolute;
+    	border-bottom: 1px solid $gray;
+    	width: 20%;
+    	left: 0;
+    	right: 0;
+    	margin: 0 auto;
+    }
+
+    &:before {
+    	top: -15px;
+    }
+
+    &:after {
+    	bottom: -15px;
+    }
+}
+
