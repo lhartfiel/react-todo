@@ -98,6 +98,13 @@
     	border: 2px solid #8CCED5;
 	    background: white;
 	    color: gray;
+	    transition: .3s ease;
+	    cursor: pointer;
+
+	    &:hover {
+	    	background: $blue;
+	    	color: #fff;
+	    }
     }
 
     &:focus {

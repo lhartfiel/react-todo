@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var RadioGroup = require('react-radio-group');
 
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
@@ -25,10 +26,17 @@ var h = {
 		var day = date.getDate();
 		var month = date.getMonth();
 		var year = date.getFullYear();
+		var class1 = "";
+
+		if(months[month] == 'May' || months[month] == 'August' || months[month] == 'September'){
+			class1="alt-month";
+		} else if (months[month] == 'April') {
+			class1="alt-month2";
+		}
 
 		return (
 			<div className='date-container'>
-				<span className="day">{day} </span><span className="month">{months[month].substr(0,3)} </span><span className="year">{year}</span>
+				<span className="day">{day} </span><span className="month">{months[month].substr(0,3)} </span><span className={class1 + " year"}>{year}</span>
 			</div>
 		)
 	}
@@ -42,7 +50,7 @@ var App = React.createClass({
 	getInitialState : function(){
 		return { 
 			list : {},
-			checked : true
+			checked : false
 		}
 	},
 
@@ -61,7 +69,6 @@ var App = React.createClass({
 				order : JSON.parse(localStorageRef)
 			})
 		}
-
 	},
 
 	componentWillUpdate : function(nextProps, nextState){
@@ -86,7 +93,7 @@ var App = React.createClass({
 				// }
 				
 				listItems.push(listItem[i]);
-				console.log(listItems);
+				// console.log(listItems);
 
 				var sort = listItems.sort(function(a, b){
 					return a.getAttribute('class') > b.getAttribute('class')
@@ -100,7 +107,6 @@ var App = React.createClass({
 				for(var i = 0; i < listItems.length; i++){
 				}
 			}
-
 	},
 
 	//METHOD: When the state changes, update it via setState and create a unique identifier with the timestamp
@@ -117,31 +123,22 @@ var App = React.createClass({
 	},
 
 	updateStatus : function(completeItem){
-
 		this.setState({ list : this.state.list});
 	},
 
-	updateRadio : function(e){
-		e.preventDefault();
-
-		this.setState({
-
-			checked : !this.state.checked
-		})
-		alert(this.state.checked);
-			
-		
+	updateRadio : function(radioStatus){
+		console.log(radioStatus);
+			alert(this.state.checked);
+			this.setState({ checked : this.state.checked });
 	},
 
 	removeItem : function(key){
-		
 		 if(confirm('Are you sure you want to delete this item?')){
 
 			delete this.state.list[key]; //deletes item
 
 			this.setState({list : this.state.list });
 		 }
-
 	},
 
 	renderItem : function(key){
@@ -149,7 +146,6 @@ var App = React.createClass({
 			<ListItem key={key} index={key} details={this.state.list[key]} updateStatus={this.updateStatus} removeItem={this.removeItem} />
 		)
 	},
-
 
 	render : function(){
 		return(
@@ -160,7 +156,7 @@ var App = React.createClass({
 					<h1>{h.todayDate()}</h1>
 					<h1 className="tagline">Do. Doing. Done</h1>
 					{/*Add props to form to pass it from the app to the form */}
-					<Form checked={this.state.checked} addItem={this.addItem} updateRadio={this.updateRadio} />
+					<Form addItem={this.addItem} updateRadio={this.updateRadio} deets={this.state.checked}/>
 					
 					{/*Loop over each to do item using the map method - grab a list of all keys and for each key it runs against this.renderItem */}
 					<ul className="clearfix">
@@ -173,12 +169,12 @@ var App = React.createClass({
 });
 
 var Form = React.createClass({
-	// getInitialState : function(){
-	// 	return {
-	// 		checked : false
-	// 	}
-	// },
 
+	// radioStatus : function(e){
+	// 	var input = e.target.value;
+
+	// 	this.props.updateRadio(input);
+	// },
 
 	newItem : function(e){
 		e.preventDefault();
@@ -208,13 +204,13 @@ var Form = React.createClass({
 				<input type="text" placeholder="add to do item" status="incomplete" ref="item" className="add-input"/>
 				<div className="input-secondary">
 					<label className="checkbox-item">High 
-						<input ref="high" type="radio" value="high" checked={this.props.checked} onChange={this.props.updateRadio}/>
+						<input ref="high" key="high" type="checkbox" unchecked value="high" />
 					</label>
 					<label className="checkbox-item">Medium 
-						<input ref="medium" type="radio" value="medium" checked={this.props.checked} onChange={this.props.updateRadio}/>
+						<input ref="medium" key="medium" type="checkbox"unchecked value="medium"/>
 					</label>
 					<label className="checkbox-item">Low 
-						<input ref="low" type="radio" value="low" checked={this.props.checked} onChange={this.props.updateRadio}/>
+						<input ref="low" key="low" type="checkbox" unchecked value="low"/>
 					</label>
 					<button className="button button-submit" type="submit">Add Item</button>
 				</div>	
